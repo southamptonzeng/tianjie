@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_content` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='内容表';
 
 BEGIN;
-INSERT INTO `__PREFIX__gonglue_content`(`id`, `category_id`, `title`, `content`, `image`, `username`, `avatar`, `views`, `comments`, createtime, `updatetime`, `weigh`,`status`) VALUES
-(1, 1, '我是标题', '我是内容', '', 'zengzh', '', 1, 1, 1553606219, 1565316234, 0, 'normal');
+INSERT INTO `__PREFIX__gonglue_content`(`id`, `category_id`, `title`, `content`, `image`, `username`, `avatar`, `views`, `likes`, `comments`, createtime, `updatetime`, `weigh`,`status`) VALUES
+(1, 1, '我是标题', '我是内容', '', 'zengzh', '', 1, 0, 1, 1553606219, 1565316234, 0, 'normal');
 COMMIT;
 
 --
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_contentcomment` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='内容评论表';
 
 BEGIN;
-INSERT INTO `__PREFIX__gonglue_contentcomment`(`id`, `content_id`, `pid`, `username`, `avatar`, `content`, `comments`, `createtime`, `updatetime`,`status`) VALUES
-(1, 1, 0, 'zengzh', '', '我是评论', 0,  1553606219, 1565316234, 'normal');
+INSERT INTO `__PREFIX__gonglue_contentcomment`(`id`, `content_id`, `pid`, `username`, `avatar`, `content`, `likes`, `comments`, `createtime`, `updatetime`,`status`) VALUES
+(1, 1, 0, 'zengzh', '', '我是评论', 0, 0,  1553606219, 1565316234, 'normal');
 COMMIT;
 
 --
@@ -101,8 +101,8 @@ CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_topiccomment` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='话题评论表';
 
 BEGIN;
-INSERT INTO `__PREFIX__gonglue_topiccomment`(`id`, `topic_id`, `pid`, `username`, `avatar`, `content`, `comments`, `createtime`, `updatetime`,`status`) VALUES
-(1, 1, 0, 'zengzh', '', '我是评论', 0, 1553606219, 1565316234, 'normal');
+INSERT INTO `__PREFIX__gonglue_topiccomment`(`id`, `topic_id`, `pid`, `username`, `avatar`, `content`, `likes`, `comments`, `createtime`, `updatetime`,`status`) VALUES
+(1, 1, 0, 'zengzh', '', '我是评论', 0, 0, 1553606219, 1565316234, 'normal');
 COMMIT;
 
 
@@ -128,6 +128,6 @@ CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_topic` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='话题表';
 
 BEGIN;
-INSERT INTO `__PREFIX__gonglue_topic`(`id`, `flag`, `title`, `content`, `image`, `username`, `avatar`, `views`, `comments`, createtime, `updatetime`, `weigh`,`status`) VALUES
-(1, 'hot', '我是标题', '我是内容', '', 'zengzh', '', 1, 1, 1553606219, 1565316234, 0, 'normal');
+INSERT INTO `__PREFIX__gonglue_topic`(`id`, `flag`, `title`, `content`, `image`, `username`, `avatar`, `views`, `likes`, `comments`, createtime, `updatetime`, `weigh`,`status`) VALUES
+(1, 'hot', '我是标题', '我是内容', '', 'zengzh', '', 1, 0, 1, 1553606219, 1565316234, 0, 'normal');
 COMMIT;
