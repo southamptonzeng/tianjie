@@ -36,7 +36,7 @@ class Gonglue extends Addons
                         ]
                     ],
                     [
-                        'name'    => 'gonelue/topic',
+                        'name'    => 'gonglue/topic',
                         'title'   => '话题管理',
                         'sublist' => [
                             ['name' => 'gonelue/topic/index', 'title' => '查看'],
