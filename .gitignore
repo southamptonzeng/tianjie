@@ -1,3 +1,2 @@
 .idea
-.gitignore
-gonglue.zip
+*.zip

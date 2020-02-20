@@ -86,7 +86,7 @@ class Gonglue extends Addons
                 ]
             ]
         ];
-        Menu::create($menu);
+        //Menu::create($menu);
         return true;
     }
 
