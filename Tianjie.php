@@ -1,15 +1,15 @@
 <?php
 
-namespace addons\gonglue;
+namespace addons\tianjie;
 
-use addons\gonglue\library\FulltextSearch;
+use addons\tianjie\library\FulltextSearch;
 use app\common\library\Menu;
 use think\Addons;
 
 /**
  * 博客插件
  */
-class Gonglue extends Addons
+class Tianjie extends Addons
 {
 
     /**
@@ -20,69 +20,44 @@ class Gonglue extends Addons
     {
         $menu = [
             [
-                'name'    => 'gonglue',
-                'title'   => '攻略管理',
+                'name'    => 'tianjie',
+                'title'   => '天街管理',
                 'sublist' => [
-
                     [
-                        'name'    => 'gonglue/topiccomment',
-                        'title'   => '话题评论管理',
-                        'sublist' => [
-                            ['name' => 'gonglue/topiccomment/index', 'title' => '查看'],
-                            ['name' => 'gonglue/topiccomment/add', 'title' => '添加'],
-                            ['name' => 'gonglue/topiccomment/edit', 'title' => '修改'],
-                            ['name' => 'gonglue/topiccomment/del', 'title' => '删除'],
-                            ['name' => 'gonglue/topiccomment/multi', 'title' => '批量更新'],
-                        ]
-                    ],
-                    [
-                        'name'    => 'gonglue/topic',
-                        'title'   => '话题管理',
-                        'sublist' => [
-                            ['name' => 'gonelue/topic/index', 'title' => '查看'],
-                            ['name' => 'gonelue/topic/add', 'title' => '添加'],
-                            ['name' => 'gonelue/topic/edit', 'title' => '修改'],
-                            ['name' => 'gonelue/topic/del', 'title' => '删除'],
-                            ['name' => 'gonelue/topic/multi', 'title' => '批量更新'],
-                        ]
-                    ],
-
-                    [
-                        'name'    => 'gonglue/contentcategory',
+                        'name'    => 'tianjie/shopcategory',
                         'title'   => '内容分类管理',
                         'sublist' => [
-                            ['name' => 'gonglue/contentcategory/index', 'title' => '查看'],
-                            ['name' => 'gonglue/contentcategory/add', 'title' => '添加'],
-                            ['name' => 'gonglue/contentcategory/edit', 'title' => '修改'],
-                            ['name' => 'gonglue/contentcategory/del', 'title' => '删除'],
-                            ['name' => 'gonglue/contentcategory/multi', 'title' => '批量更新'],
+                            ['name' => 'tianjie/shopcategory/index', 'title' => '查看'],
+                            ['name' => 'tianjie/shopcategory/add', 'title' => '添加'],
+                            ['name' => 'tianjie/shopcategory/edit', 'title' => '修改'],
+                            ['name' => 'tianjie/shopcategory/del', 'title' => '删除'],
+                            ['name' => 'tianjie/shopcategory/multi', 'title' => '批量更新'],
+                        ]
+                    ],
+
+
+                    [
+                        'name'    => 'tianjie/shop',
+                        'title'   => '店铺管理',
+                        'sublist' => [
+                            ['name' => 'tianjie/shop/index', 'title' => '查看'],
+                            ['name' => 'tianjie/shop/add', 'title' => '添加'],
+                            ['name' => 'tianjie/shop/edit', 'title' => '修改'],
+                            ['name' => 'tianjie/shop/del', 'title' => '删除'],
+                            ['name' => 'tianjie/shop/multi', 'title' => '批量更新'],
                         ]
                     ],
                     [
-                        'name'    => 'gonglue/contentcomment',
-                        'title'   => '内容评论管理',
-                        'icon'    => 'fa fa-comment',
+                        'name'    => 'tianjie/shopcomment',
+                        'title'   => '店铺评论管理',
                         'sublist' => [
-                            ['name' => 'gonglue/contentcomment/index', 'title' => '查看'],
-                            ['name' => 'gonglue/contentcomment/add', 'title' => '添加'],
-                            ['name' => 'gonglue/contentcomment/edit', 'title' => '修改'],
-                            ['name' => 'gonglue/contentcomment/del', 'title' => '删除'],
-                            ['name' => 'gonglue/contentcomment/multi', 'title' => '批量更新'],
-                        ]
-                    ],
-                    [
-                        'name'    => 'gonglue/content',
-                        'title'   => '内容管理',
-                        'icon'    => 'fa fa-th-large',
-                        'sublist' => [
-                            ['name' => 'gonglue/content/index', 'title' => '查看'],
-                            ['name' => 'gonglue/content/add', 'title' => '添加'],
-                            ['name' => 'gonglue/content/edit', 'title' => '修改'],
-                            ['name' => 'gonglue/content/del', 'title' => '删除'],
-                            ['name' => 'gonglue/content/multi', 'title' => '批量更新'],
+                            ['name' => 'tianjie/shopcomment/index', 'title' => '查看'],
+                            ['name' => 'tianjie/shopcomment/add', 'title' => '添加'],
+                            ['name' => 'tianjie/shopcomment/edit', 'title' => '修改'],
+                            ['name' => 'tianjie/shopcomment/del', 'title' => '删除'],
+                            ['name' => 'tianjie/shopcomment/multi', 'title' => '批量更新'],
                         ]
                     ]
-                    
                 ]
             ]
         ];
@@ -96,7 +71,7 @@ class Gonglue extends Addons
      */
     public function uninstall()
     {
-        Menu::delete('gonglue');
+        Menu::delete('tianjie');
         return true;
     }
 
@@ -105,7 +80,7 @@ class Gonglue extends Addons
      */
     public function enable()
     {
-        Menu::enable('gonglue');
+        Menu::enable('tianjie');
     }
 
     /**
@@ -113,7 +88,7 @@ class Gonglue extends Addons
      */
     public function disable()
     {
-        Menu::disable('gonglue');
+        Menu::disable('tianjie');
     }
 
     public function xunsearchConfigInit()
@@ -123,7 +98,7 @@ class Gonglue extends Addons
 
     public function xunsearchIndexReset($project)
     {
-        if (!$project['isaddon'] || $project['name'] != 'gonglue') {
+        if (!$project['isaddon'] || $project['name'] != 'tianjie') {
             return;
         }
         return FulltextSearch::reset();
@@ -132,7 +107,7 @@ class Gonglue extends Addons
     /**
      * 脚本替换
      */
-    public function viewFilter(& $content)
+    public function viewFilter(& $shop)
     {
         $request = \think\Request::instance();
         $dispatch = $request->dispatch();
@@ -141,7 +116,7 @@ class Gonglue extends Addons
             return;
         }
         $addon = isset($dispatch['var']['addon']) ? $dispatch['var']['addon'] : $request->param('addon');
-        if ($addon != 'gonglue') {
+        if ($addon != 'tianjie') {
             return;
         }
         $style = '';
@@ -151,9 +126,9 @@ class Gonglue extends Addons
                 ${$match[1]} .= str_replace($match[2], '', $match[0]);
             }
             return '';
-        }, $content);
-        $content = preg_replace_callback('/^\s+(\{__STYLE__\}|\{__SCRIPT__\})\s+$/m', function ($matches) use ($style, $script) {
+        }, $shop);
+        $shop = preg_replace_callback('/^\s+(\{__STYLE__\}|\{__SCRIPT__\})\s+$/m', function ($matches) use ($style, $script) {
             return $matches[1] == '{__STYLE__}' ? $style : $script;
-        }, $result ? $result : $content);
+        }, $result ? $result : $shop);
     }
 }

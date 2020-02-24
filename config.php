@@ -7,7 +7,7 @@ return array(
         'type'    => 'string',
         'content' =>
             array(),
-        'value'   => '婚庆攻略',
+        'value'   => '天街水城',
         'rule'    => 'required',
         'msg'     => '',
         'tip'     => '',
@@ -20,7 +20,7 @@ return array(
         'type'    => 'string',
         'content' =>
             array(),
-        'value'   => 'FastAdmin\'s Gonglue',
+        'value'   => 'FastAdmin\'s Tianjie',
         'rule'    => 'required',
         'msg'     => '',
         'tip'     => '',
@@ -111,7 +111,7 @@ return array(
         'type'    => 'image',
         'content' =>
             array(),
-        'value'   => '/assets/addons/gonglue/img/avatar.png', //没有改变路径TODO
+        'value'   => '/assets/addons/tianjie/img/avatar.png', //没有改变路径TODO
         'rule'    => 'required',
         'msg'     => '',
         'tip'     => '',
@@ -124,7 +124,7 @@ return array(
         'type'    => 'image',
         'content' =>
             array(),
-        'value'   => '/assets/addons/gonglue/img/qrcode.png', //没有改变路径TODO
+        'value'   => '/assets/addons/tianjie/img/qrcode.png', //没有改变路径TODO
         'rule'    => 'required',
         'msg'     => '',
         'tip'     => '',
@@ -137,7 +137,7 @@ return array(
         'type'    => 'image',
         'content' =>
             array(),
-        'value'   => '/assets/addons/gonglue/img/logo.jpg', //没有改变路径TODO
+        'value'   => '/assets/addons/tianjie/img/logo.jpg', //没有改变路径TODO
         'rule'    => 'required',
         'msg'     => '',
         'tip'     => '',

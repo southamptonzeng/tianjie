@@ -1,12 +1,10 @@
 --
--- 表的结构 `__PREFIX__gonglue_contentcategory`
+-- 表的结构 `__PREFIX__tianjie_shopcategory`
 --
 
-CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_contentcategory` (
+CREATE TABLE IF NOT EXISTS `__PREFIX__tianjie_shopcategory` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `pid` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '父分类ID',
   `name` varchar(30) NOT NULL DEFAULT '' COMMENT '分类名称',
-  `nickname` varchar(50) DEFAULT '' COMMENT '分类昵称',
   `flag` set('hot','index','recommend') NOT NULL DEFAULT 'index' COMMENT '分类标志',
   `image` varchar(100) DEFAULT '' COMMENT '图片',
   `keywords` varchar(255) DEFAULT '' COMMENT '关键字',
@@ -16,117 +14,64 @@ CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_contentcategory` (
   `weigh` int(10) NOT NULL DEFAULT '0' COMMENT '权重',
   `status` enum('normal','hidden') NOT NULL DEFAULT 'normal' COMMENT '状态',
   PRIMARY KEY (`id`),
-  KEY `weigh` (`weigh`,`id`),
-  KEY `pid` (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='内容分类表';
+  KEY `weigh` (`weigh`,`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店铺分类表';
 
 BEGIN;
-INSERT INTO `__PREFIX__gonglue_contentcategory`(`id`, `pid`, `name`, `nickname`, `flag`, `image`, `keywords`, `description`, `createtime`, `updatetime`,`weigh`,`status`) VALUES
-(1, 0, '分类一', '', 'index', '', '', '', 1553606219, 1565316234, 0, 'normal');
+INSERT INTO `__PREFIX__tianjie_shopcategory`(`id`, `name`, `flag`, `image`, `keywords`, `description`, `createtime`, `updatetime`,`weigh`,`status`) VALUES
+(1, '特色店铺', 'index', '', '', '', 1553606219, 1565316234, 0, 'normal');
 COMMIT;
 
 
 --
--- 表的结构 `__PREFIX__gonglue_content`
+-- 表的结构 `__PREFIX__tianjie_shop`
 --
 
-CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_content` (
+CREATE TABLE IF NOT EXISTS `__PREFIX__tianjie_shop` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `category_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '分类ID',
-  `title` varchar(50) NOT NULL DEFAULT '' COMMENT '标题',
-  `content` text NOT NULL COMMENT '内容',
-  `image` varchar(100) DEFAULT '' COMMENT '大图',
-  `username` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名',
-  `avatar` varchar(255) DEFAULT '' COMMENT '头像',
-  `views` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '点击',
-  `likes` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '点赞',
-  `comments` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '评论数',
+  `shopname` varchar(50) NOT NULL DEFAULT '' COMMENT '店铺名',
+  `image` varchar(100) NOT NULL DEFAULT '' COMMENT '店铺照片',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '店铺描述',
+  `address` varchar(255) NOT NULL DEFAULT '' COMMENT '店铺地址',
+  `score` double(2, 1) NOT NULL DEFAULT 0.0 COMMENT '店铺得分',
+  `comments` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '店铺评论数',
   `createtime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updatetime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   `weigh` int(10) NOT NULL DEFAULT '0' COMMENT '权重',
   `status` enum('normal','hidden') NOT NULL DEFAULT 'normal' COMMENT '状态',
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='内容表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店铺表';
 
 BEGIN;
-INSERT INTO `__PREFIX__gonglue_content`(`id`, `category_id`, `title`, `content`, `image`, `username`, `avatar`, `views`, `likes`, `comments`, createtime, `updatetime`, `weigh`,`status`) VALUES
-(1, 1, '我是标题', '我是内容', '', 'zengzh', '', 1, 0, 1, 1553606219, 1565316234, 0, 'normal');
+INSERT INTO `__PREFIX__tianjie_shop`(`id`, `category_id`, `shopname`, `image`, `description`, `address`, `score`, `comments`, createtime, `updatetime`, `weigh`,`status`) VALUES
+(1, 1, '我是第一个店铺', '', '我是第一个店铺', 'AAAAA', 4.9, 0, 1553606219, 1565316234, 0, 'normal');
 COMMIT;
 
 --
--- 表的结构 `__PREFIX__gonglue_contentcomment`
+-- 表的结构 `__PREFIX__tianjie_shopcomment`
 --
 
-CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_contentcomment` (
+CREATE TABLE IF NOT EXISTS `__PREFIX__tianjie_shopcomment` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `content_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '内容ID',
-  `pid` int(10) NOT NULL DEFAULT '0' COMMENT '父ID',
+  `shop_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '店铺id',
   `username` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名',
   `avatar` varchar(255) DEFAULT '' COMMENT '头像',
-  `content` text NOT NULL COMMENT '内容',
+  `content` text NOT NULL COMMENT '评价内容',
   `likes` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '点赞',
-  `comments` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '评论数',
+  `product` double(2, 1) NOT NULL DEFAULT 0.0 COMMENT '点赞',
+  `service` double(2, 1) NOT NULL DEFAULT 0.0 COMMENT '服务',
+  `quality` double(2, 1) NOT NULL DEFAULT 0.0 COMMENT '质量',
+  `averagesorce` double(2, 1) NOT NULL DEFAULT 0.0 COMMENT '平均得分',
   `createtime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updatetime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` enum('normal','hidden') NOT NULL DEFAULT 'normal' COMMENT '状态',
   PRIMARY KEY (`id`),
-  KEY `content_id` (`content_id`,`pid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='内容评论表';
+  KEY `shop_id` (`shop_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店铺评论表';
 
 BEGIN;
-INSERT INTO `__PREFIX__gonglue_contentcomment`(`id`, `content_id`, `pid`, `username`, `avatar`, `content`, `likes`, `comments`, `createtime`, `updatetime`,`status`) VALUES
-(1, 1, 0, 'zengzh', '', '我是评论', 0, 0,  1553606219, 1565316234, 'normal');
-COMMIT;
-
---
--- 表的结构 `__PREFIX__gonglue_topic`
---
-CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_topic` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `flag` set('hot','recommend') NOT NULL DEFAULT 'recommend' COMMENT '标志',
-  `title` varchar(50) NOT NULL DEFAULT '' COMMENT '标题',
-  `content` text NOT NULL COMMENT '内容',
-  `image` varchar(100) DEFAULT '' COMMENT '大图',
-  `username` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名',
-  `avatar` varchar(255) DEFAULT '' COMMENT '头像',
-  `views` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '点击',
-  `likes` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '点赞',
-  `comments` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '评论数',
-  `createtime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updatetime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `weigh` int(10) NOT NULL DEFAULT '0' COMMENT '权重',
-  `status` enum('normal','hidden') NOT NULL DEFAULT 'normal' COMMENT '状态',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题表';
-
-BEGIN;
-INSERT INTO `__PREFIX__gonglue_topic`(`id`, `flag`, `title`, `content`, `image`, `username`, `avatar`, `views`, `likes`, `comments`, createtime, `updatetime`, `weigh`,`status`) VALUES
-(1, 'hot', '我是标题', '我是内容', '', 'zengzh', '', 1, 0, 1, 1553606219, 1565316234, 0, 'normal');
-COMMIT;
-
-
---
--- 表的结构 `__PREFIX__gonglue_topiccomment`
---
-
-CREATE TABLE IF NOT EXISTS `__PREFIX__gonglue_topiccomment` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `topic_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '话题ID',
-  `pid` int(10) NOT NULL DEFAULT '0' COMMENT '父ID',
-  `username` varchar(50) NOT NULL DEFAULT '' COMMENT '用户名',
-  `avatar` varchar(255) DEFAULT '' COMMENT '头像',
-  `content` text NOT NULL COMMENT '内容',
-  `likes` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '点赞',
-  `comments` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '评论数',
-  `createtime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updatetime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
-  `status` enum('normal','hidden') NOT NULL DEFAULT 'normal' COMMENT '状态',
-  PRIMARY KEY (`id`),
-  KEY `topic_id` (`topic_id`,`pid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题评论表';
-
-BEGIN;
-INSERT INTO `__PREFIX__gonglue_topiccomment`(`id`, `topic_id`, `pid`, `username`, `avatar`, `content`, `likes`, `comments`, `createtime`, `updatetime`,`status`) VALUES
-(1, 1, 0, 'zengzh', '', '我是评论', 0, 0, 1553606219, 1565316234, 'normal');
+INSERT INTO `__PREFIX__tianjie_shopcomment`(`id`, `shop_id`, `username`, `avatar`, `content`, `likes`, `createtime`, `updatetime`,`status`) VALUES
+(1, 1, 'zengzh', '', '我是评论', 0, 1553606219, 1565316234, 'normal');
 COMMIT;
