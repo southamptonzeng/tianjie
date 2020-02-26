@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS `__PREFIX__tianjie_shopcategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店铺分类表';
 
 BEGIN;
-INSERT INTO `__PREFIX__tianjie_shopcategory`(`id`, `name`, `flag`, `image`, `keywords`, `description`, `createtime`, `updatetime`,`weigh`,`status`) VALUES
-(1, '特色店铺', 'index', '', '', '', 1553606219, 1565316234, 0, 'normal');
+INSERT INTO `__PREFIX__tianjie_shopcategory` VALUES (1, '特色店铺', 'index', '', '', '', 1553606219, 1565316234, 0, 'normal');
+INSERT INTO `__PREFIX__tianjie_shopcategory` VALUES (2, '网红店铺', 'index', '', '', '', 1582531695, 1582531695, 2, 'normal');
 COMMIT;
 
 
@@ -45,8 +45,14 @@ CREATE TABLE IF NOT EXISTS `__PREFIX__tianjie_shop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店铺表';
 
 BEGIN;
-INSERT INTO `__PREFIX__tianjie_shop`(`id`, `category_id`, `shopname`, `image`, `description`, `address`, `score`, `comments`, createtime, `updatetime`, `weigh`,`status`) VALUES
-(1, 1, '我是第一个店铺', '', '我是第一个店铺', 'AAAAA', 4.9, 0, 1553606219, 1565316234, 0, 'normal');
+INSERT INTO `__PREFIX__tianjie_shop` VALUES (2, 1, '天街水城成都九宫格辣火锅', '/uploads/20200225/04dc6dfa51774a69384509d3dfde7310.png', '火锅超级辣', '天界水城81号', 0.0, 0, 1582591982, 1582591982, 2, 'normal');
+INSERT INTO `__PREFIX__tianjie_shop` VALUES (3, 1, '天街水城成都九宫格辣火锅', '/uploads/20200225/e80943b464a29fd29e728637b3b5b002.png', '很好的一家', '郫县3号', 0.0, 0, 1582592035, 1582592035, 3, 'normal');
+INSERT INTO `__PREFIX__tianjie_shop` VALUES (4, 1, '天街水城成都九宫格辣火锅', '/uploads/20200225/bfd2f6ea6775709d8762a45967370e1a.png', '很好的美食。一家', '清水河2号', 5.0, 0, 1582592074, 1582592074, 4, 'normal');
+INSERT INTO `__PREFIX__tianjie_shop` VALUES (5, 1, '天街水城成都九宫格辣火锅', '/uploads/20200225/fcd239fec44fb6af9dd329138416c21a.png', '很好的美食。一家服装', '北京2号', 3.0, 0, 1582592110, 1582592110, 5, 'normal');
+INSERT INTO `__PREFIX__tianjie_shop` VALUES (6, 2, '金拱门', '/uploads/20200225/04dc6dfa51774a69384509d3dfde7310.png', '很好的一家', '天界水城81号', 3.0, 0, 1582592165, 1582592165, 6, 'normal');
+INSERT INTO `__PREFIX__tianjie_shop` VALUES (7, 2, '步行街', '/uploads/20200225/bfd2f6ea6775709d8762a45967370e1a.png', '很好的一家餐厅', '清水河2号', 4.0, 0, 1582592196, 1582592196, 7, 'normal');
+INSERT INTO `__PREFIX__tianjie_shop` VALUES (8, 2, '金拱门', '/uploads/20200225/bfd2f6ea6775709d8762a45967370e1a.png', '很好的美食。一家服装', '天界水城81号', 8.0, 0, 1582592219, 1582592219, 8, 'normal');
+INSERT INTO `__PREFIX__tianjie_shop` VALUES (9, 2, '步行街', '/uploads/20200225/fcd239fec44fb6af9dd329138416c21a.png', '很好的一家餐厅', '郫县3号', 4.0, 0, 1582592249, 1582592249, 9, 'normal');
 COMMIT;
 
 --
@@ -72,6 +78,6 @@ CREATE TABLE IF NOT EXISTS `__PREFIX__tianjie_shopcomment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店铺评论表';
 
 BEGIN;
-INSERT INTO `__PREFIX__tianjie_shopcomment`(`id`, `shop_id`, `username`, `avatar`, `content`, `likes`, `createtime`, `updatetime`,`status`) VALUES
-(1, 1, 'zengzh', '', '我是评论', 0, 1553606219, 1565316234, 'normal');
+INSERT INTO `__PREFIX__tianjie_shopcomment` VALUES (1, 1, 'zengzh', '', '我是评论', 0, 0.0, 0.0, 0.0, 0.0, 1553606219, 1565316234, 'normal');
+INSERT INTO `__PREFIX__tianjie_shopcomment` VALUES (2, 2, 'zengzh', '', '真Tm好吃。', 0, 0.0, 0.0, 0.0, 0.0, 1582621429, 1582621429, 'normal');
 COMMIT;
