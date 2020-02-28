@@ -81,3 +81,17 @@ BEGIN;
 INSERT INTO `__PREFIX__tianjie_shopcomment` VALUES (1, 1, 'zengzh', '', '我是评论', 0, 0.0, 0.0, 0.0, 0.0, 1553606219, 1565316234, 'normal');
 INSERT INTO `__PREFIX__tianjie_shopcomment` VALUES (2, 2, 'zengzh', '', '真Tm好吃。', 0, 0.0, 0.0, 0.0, 0.0, 1582621429, 1582621429, 'normal');
 COMMIT;
+
+
+--
+-- 表的结构 `__PREFIX__tianjie_shopcommentlike`
+--
+
+CREATE TABLE IF NOT EXISTS `__PREFIX__tianjie_shopcommentlike`
+(
+    `id`         int(10) UNSIGNED         NOT NULL AUTO_INCREMENT,
+    `comment_id`   int(10) UNSIGNED         NOT NULL DEFAULT '0' COMMENT '店铺评论ID',
+    `username`   varchar(50)              NOT NULL DEFAULT '' COMMENT '用户名',
+    PRIMARY KEY (`id`),
+    KEY `comment_id` (`comment_id`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT ='店铺评论点赞表';

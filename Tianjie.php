@@ -21,11 +21,11 @@ class Tianjie extends Addons
         $menu = [
             [
                 'name'    => 'tianjie',
-                'title'   => '天街管理',
+                'title'   => '天街水城',
                 'sublist' => [
                     [
                         'name'    => 'tianjie/shopcategory',
-                        'title'   => '内容分类管理',
+                        'title'   => '店铺分类管理',
                         'sublist' => [
                             ['name' => 'tianjie/shopcategory/index', 'title' => '查看'],
                             ['name' => 'tianjie/shopcategory/add', 'title' => '添加'],

@@ -28,7 +28,9 @@ class Shop extends Backend
         'viewComment',
         'addComment',
         'likeComment',
-        'searchShop'
+        'searchShop',
+        'shopCommentLikeStatus',
+        'shopCommentStatus'
     ];
 
     public function _initialize()
@@ -92,8 +94,16 @@ class Shop extends Backend
 
         $data = $request->param('shop_id');
 
+        $shopComment = new \app\admin\model\tianjie\Shopcomment();
+        $count = $shopComment->where('shop_id', $data)->count();
+
+        //更新评论条数
         $shop = new \app\admin\model\tianjie\Shop();
+        $shop->where('id', $data)->setField('comments', $count);
+
         $viewData = $shop->where('id', $data)->find();
+
+
         return json($viewData);
 
     }
@@ -149,7 +159,12 @@ class Shop extends Backend
 
             $shop->where('id', $data['shop_id'])->setField('score', $score);
 
-            $this->success('评论添加成功');
+            return json(
+                [
+                    'code' => 1,
+                    'msg' => '评论添加成功'
+                ]
+            );
         } else {
             $this->error($result);
         }
@@ -161,11 +176,23 @@ class Shop extends Backend
      * 评论点赞
      */
     public function likeComment(Request $request) {
-        $comment_id = $request->param('comment_id');
+        $data = [
+            'comment_id' => $request->param('comment_id'),
+            'username' => $request->param('username')
+        ];
 
         $comment = new \app\admin\model\tianjie\Shopcomment();
-        $comment->where('id', $comment_id)->setInc('likes');
-        $this->success('点赞成功');
+        $comment->where('id', $data['comment_id'])->setInc('likes');
+
+        $shopCommentLike = new \app\admin\model\tianjie\Shopcommentlike();
+        $shopCommentLike->save($data);
+
+        return json(
+            [
+                'code' => 1,
+                'msg' => '点赞成功'
+            ]
+        );
     }
 
     /**
@@ -182,4 +209,60 @@ class Shop extends Backend
         $data =$shop->where($where)->page($page, $num)->select();
         return json($data);
     }
+
+    /**
+     * 店铺评论点赞状态
+     */
+    public function shopCommentLikeStatus(Request $request)
+    {
+        $comment_id = $request->param('comment_id');
+        $username = $request->param('username');
+
+        $topicCommentLike = new \app\admin\model\tianjie\Shopcommentlike();
+        $res = $topicCommentLike->where('comment_id', $comment_id)->where('username', $username)->find();
+
+        if (empty($res)) {
+            return json([
+                'code' => 0,
+                'msg' => '未点赞'
+            ]);
+        } else {
+            return json(
+                [
+                    'code' => 1,
+                    'msg' => '已点赞'
+                ]
+            );
+        }
+    }
+
+    /**
+     * 店铺评论状态
+    */
+    public function shopCommentStatus(Request $request) {
+        $data = [
+            'shop_id' => $request->param('shop_id'),
+            'username' => $request->param('username'),
+        ];
+
+        $shopComment = new \app\admin\model\tianjie\Shopcomment();
+
+        $res = $shopComment->where('shop_id', $data['shop_id'])->where('username', $data['username'])->find();
+
+        if (empty($res)) {
+            return json([
+                'code' => 0,
+                'msg' => '未添加评论'
+            ]);
+        } else {
+            return json(
+                [
+                    'code' => 1,
+                    'msg' => '已添加评论'
+                ]
+            );
+        }
+
+    }
+
 }
