@@ -57,7 +57,19 @@ class Tianjie extends Addons
                             ['name' => 'tianjie/shopcomment/del', 'title' => '删除'],
                             ['name' => 'tianjie/shopcomment/multi', 'title' => '批量更新'],
                         ]
+                    ],
+                    [
+                        'name'    => 'tianjie/shuffle',
+                        'title'   => '轮播图管理',
+                        'sublist' => [
+                            ['name' => 'tianjie/shuffle/index', 'title' => '查看'],
+                            ['name' => 'tianjie/shuffle/add', 'title' => '添加'],
+                            ['name' => 'tianjie/shuffle/edit', 'title' => '修改'],
+                            ['name' => 'tianjie/shuffle/del', 'title' => '删除'],
+                            ['name' => 'tianjie/shuffle/multi', 'title' => '批量更新'],
+                        ]
                     ]
+
                 ]
             ]
         ];

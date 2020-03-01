@@ -95,3 +95,16 @@ CREATE TABLE IF NOT EXISTS `__PREFIX__tianjie_shopcommentlike`
     PRIMARY KEY (`id`),
     KEY `comment_id` (`comment_id`) USING BTREE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT ='店铺评论点赞表';
+
+--
+-- 表的结构 `__PREFIX__tianjie_shuffle`
+--
+
+CREATE TABLE IF NOT EXISTS `__PREFIX__tianjie_shuffle`
+(
+    `id`         int(10) UNSIGNED         NOT NULL AUTO_INCREMENT,
+    `image`   varchar(255)              NOT NULL DEFAULT '' COMMENT '轮播图',
+    `createtime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间',
+    `updatetime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT ='轮播图表';

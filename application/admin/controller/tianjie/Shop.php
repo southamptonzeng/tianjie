@@ -30,7 +30,8 @@ class Shop extends Backend
         'likeComment',
         'searchShop',
         'shopCommentLikeStatus',
-        'shopCommentStatus'
+        'shopCommentStatus',
+        'getShuffle'
     ];
 
     public function _initialize()
@@ -141,8 +142,7 @@ class Shop extends Backend
 
         $averagescore = ($data['product'] + $data['quality'] + $data['service'])/3;
 
-        $data = array_merge($data,
-            ['averagescore' => $averagescore]);
+        $data = array_merge($data, ['averagesorce' => $averagescore]);
 
         $shopComment = new \app\admin\model\tianjie\Shopcomment();
         $result = $shopComment->addComment($data);
@@ -263,6 +263,15 @@ class Shop extends Backend
             );
         }
 
+    }
+
+    /**
+     * 获得轮播图
+     */
+    public function getShuffle() {
+        $shuffle = new \app\admin\model\tianjie\Shuffle();
+        $res = $shuffle->select();
+        return json($res);
     }
 
 }
