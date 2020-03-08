@@ -31,7 +31,8 @@ class Shop extends Backend
         'searchShop',
         'shopCommentLikeStatus',
         'shopCommentStatus',
-        'getShuffle'
+        'getShuffle',
+        'upload'
     ];
 
     public function _initialize()
@@ -272,6 +273,37 @@ class Shop extends Backend
         $shuffle = new \app\admin\model\tianjie\Shuffle();
         $res = $shuffle->select();
         return json($res);
+    }
+
+    /**
+     * 上传图片函数
+     */
+    public function upload(Request $request)
+    {
+        // 获取表单上传的文件，例如上传了一张图片
+        $file = $request->file('image');
+        if ($file) {
+            //将传入的图片移动到框架应用根目录/public/uploads/ 目录下，ROOT_PATH是根目录下，DS是代表斜杠 /
+            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+            if ($info) {
+                return json([
+                    'code' => 1,
+                    'msg' => '上传成功',
+                    'data' => $info->getSaveName()
+                ]);
+
+            } else {
+                // 上传失败获取错误信息
+                return json([
+                    'code' => 0,
+                    'msg' => '上传失败'
+                ]);
+            }
+        }
+        return json([
+            'code' => 0,
+            'msg' => '上传失败'
+        ]);
     }
 
 }
