@@ -282,41 +282,29 @@ class Shop extends Backend
     {
         // 获取表单上传的文件，例如上传了一张图片
         $file = $request->file('image');
-
-        $response = new Response();
-        $response->contentType('multipart/form-data');
-
         if ($file) {
             //将传入的图片移动到框架应用根目录/public/uploads/ 目录下，ROOT_PATH是根目录下，DS是代表斜杠 /
             $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-
-
             if ($info) {
-                $response ->header(
-
-                    ['code' => 1,
-                        'msg' => 'upload success',
-                        'data' => $info->getSaveName()
-                    ]
-                );
-                return $response;
+                return json([
+                    'code' => 1,
+                    'msg' => '上传成功',
+                    'data' => $info->getSaveName()
+                ]);
 
             } else {
                 // 上传失败获取错误信息
-                return $response ->header(
-
-                    ['code' => 0,
-                        'msg' => 'upload fail'
-                    ]
-                );
+                return json([
+                    'code' => 0,
+                    'msg' => '上传失败'
+                ]);
             }
         }
-        return $response ->header(
-
-            ['code' => 0,
-                'msg' => 'upload fail'
-            ]
-        );
+        return json([
+            'code' => 0,
+            'msg' => '上传失败'
+        ]);
     }
+
 
 }
